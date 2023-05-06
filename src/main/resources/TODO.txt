@@ -1,0 +1,13 @@
+Enigma Lifesteal
+
+
+
+Essential Commands
+- Help (List of pages for how many commands)
+- Gamemode (0, 1, 2, 3, c, s, a, spec, creative, survival, adventure, spectator)
+- Fly (True/False)
+- Heal
+- Kill
+- Coords (x, y, z, world name)
+- Near (The Closest players within 100 blocks)
+-
