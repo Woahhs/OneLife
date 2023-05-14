@@ -6,11 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="Enigma" />
+        <module name="OneLife" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="Enigma" target="18" />
+      <module name="OneLife" target="18" />
     </bytecodeTargetLevel>
   </component>
 </project>
