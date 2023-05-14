@@ -1,7 +1,7 @@
-  name: Enigma_LifeSteal
-  main: org.enigma.Enigma
+  name: Enigma_OneLife
+  main: org.enigma.onelife.OneLife
   version: DEV-01
   authors:
     - Woahhs
     - InspectMC
-  description: All in one Lifesteal Survival Core. This plugin is made with the best optimization tweaks, with amazing exclusive features!
+  description: All in one OneLife Survival Core. This plugin is made with the best optimization tweaks, with amazing exclusive features!

@@ -1,4 +1,4 @@
-package org.enigma;
+package org.enigma.onelife;
 
 import lombok.Getter;
 import org.bukkit.Bukkit;
@@ -6,11 +6,12 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.enigma.onelife.config.ConfigFile;
 import org.enigma.onelife.essentials.utils.Utils;
+import org.enigma.onelife.profiles.ProfileListener;
 
-public class Enigma extends JavaPlugin {
+public class OneLife extends JavaPlugin {
 
     @Getter
-    private static Enigma instance;
+    private static OneLife instance;
     @Getter
     private Utils utils = new Utils();
     @Getter
@@ -37,6 +38,7 @@ public class Enigma extends JavaPlugin {
 
     private void registerListeners(){
         PluginManager pluginManager = Bukkit.getPluginManager();
+        pluginManager.registerEvents(new ProfileListener(), this);
 
     }
     private void registerCommands(){

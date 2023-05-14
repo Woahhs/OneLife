@@ -10,6 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="Enigma" target="18" />
       <module name="OneLife" target="18" />
     </bytecodeTargetLevel>
   </component>

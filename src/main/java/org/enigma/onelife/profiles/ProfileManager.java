@@ -3,7 +3,7 @@ package org.enigma.onelife.profiles;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
-import org.enigma.Enigma;
+import org.enigma.onelife.OneLife;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -15,20 +15,36 @@ public class ProfileManager {
 
 
     private Profile profile;
-    private Map<UUID, Profile> profileMap = new HashMap<>();
-    private Enigma instance = Enigma.getInstance();
+    public Map<UUID, Profile> profileMap = new HashMap<>();
+    private OneLife instance = OneLife.getInstance();
 
-
-    public void removeProfile(Player player){
+    // Removes the players profile from the map.
+    public void removeProfileFromMap(Player player){
         profileMap.remove(player.getUniqueId());
     }
 
+    // Gets the players profile from the config.
     public Profile getProfileByConfig(Player player){
-
-
+        YamlConfiguration profileConfig = instance.getProfileConfig().getConfiguration();
+        profile.setLife(profileConfig.getInt(player.getUniqueId() + ".Life"));
+        profile.setBalance(profileConfig.getLong(player.getUniqueId() + ".Balance"));
+        profile.setDrachma(profileConfig.getInt(player.getUniqueId() + ".Drachma"));
+        profile.setKills(profileConfig.getInt(player.getUniqueId() + ".Kills"));
         return profile;
     }
 
+    // Saves the players profile to the profile config.
+    public void saveProfileToConfig(Player player){
+        profile = getProfileByPlayer(player);
+        YamlConfiguration profileConfig = instance.getProfileConfig().getConfiguration();
+        profileConfig.set(player.getUniqueId() + ".Life", profile.getLife());
+        profileConfig.set(player.getUniqueId() + ".Balance", profile.getBalance());
+        profileConfig.set(player.getUniqueId() + ".Drachma", profile.getDrachma());
+        profileConfig.set(player.getUniqueId() + ".Kills", profile.getKills());
+        saveProfileConfig();
+    }
+
+    // Gets the players profile from the player themselves
     public Profile getProfileByPlayer(Player player) {
         if(profileMap.get(player.getUniqueId()) == null){
             profile = createProfile(player);
@@ -38,6 +54,7 @@ public class ProfileManager {
         return profile;
     }
 
+    // Creates a default profile for the player.
     public Profile createProfile(Player player){
         profile = new Profile(player.getUniqueId());
         profile.setBalance(500);
@@ -48,6 +65,8 @@ public class ProfileManager {
         return profile;
     }
 
+
+    // Async method to save the profile config to save thread usage.
     public void saveProfileConfig(){
         new BukkitRunnable(){
             @Override
