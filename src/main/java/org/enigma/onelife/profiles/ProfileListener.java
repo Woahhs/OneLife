@@ -6,12 +6,14 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.enigma.onelife.OneLife;
 
 public class ProfileListener implements Listener {
 
     private ProfileManager profileManager = new ProfileManager();
     private Player player;
     private Profile profile;
+    private OneLife instance = OneLife.getInstance();
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event){
@@ -19,10 +21,11 @@ public class ProfileListener implements Listener {
         // If the player has not played before, create them a new profile.
         if(!player.hasPlayedBefore()){
             profileManager.createProfile(player);
+            return;
         }
         // Otherwise, get their profile from the config and put it into the map.
         profile = profileManager.getProfileByConfig(player);
-        profileManager.profileMap.put(player.getUniqueId(), profile);
+        instance.getProfileMap().put(player.getUniqueId(), profile);
 
     }
     @EventHandler

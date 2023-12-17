@@ -15,12 +15,12 @@ public class ProfileManager {
 
 
     private Profile profile;
-    public Map<UUID, Profile> profileMap = new HashMap<>();
+
     private OneLife instance = OneLife.getInstance();
 
     // Removes the players profile from the map.
     public void removeProfileFromMap(Player player){
-        profileMap.remove(player.getUniqueId());
+        instance.getProfileMap().remove(player.getUniqueId());
     }
 
     // Gets the players profile from the config.
@@ -46,11 +46,11 @@ public class ProfileManager {
 
     // Gets the players profile from the player themselves
     public Profile getProfileByPlayer(Player player) {
-        if(profileMap.get(player.getUniqueId()) == null){
+        if(instance.getProfileMap().get(player.getUniqueId()) == null){
             profile = createProfile(player);
             return profile;
         }
-        profileMap.get(player.getUniqueId());
+        instance.getProfileMap().get(player.getUniqueId());
         return profile;
     }
 
@@ -61,7 +61,7 @@ public class ProfileManager {
         profile.setDrachma(10);
         profile.setKills(0);
         profile.setLife(1);
-        profileMap.put(player.getUniqueId(), profile);
+        instance.getProfileMap().put(player.getUniqueId(), profile);
         return profile;
     }
 
